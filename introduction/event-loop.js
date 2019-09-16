@@ -23,7 +23,11 @@ let cb = function(a) {
   console.log("cb: ", a);
 };
 
+// blocking heavy call
 let i = 0;
 while (i < 1000000000) {
   i++;
 }
+
+process.nextTick(() => console.log("Next Tick")); // more immediate than setImmediate
+setImmediate(() => console.log("Set immediate")); // next loop of execution; more compatible than process.nextTick()
